@@ -6,16 +6,21 @@ public class GameDirector : MonoBehaviour
 {
     public Transform enemy;
     public Transform player;
+    public Transform playerHolder;
     public Rigidbody playerRb;
 
     public float enemySpeed;
     public float playerSpeed;
     public float jumpForce;
 
+    public Vector2 turn;
+
+    public float mouseSensitivity;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -27,24 +32,35 @@ public class GameDirector : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.S))
         {
-            MovePlayer(new Vector3(0, 0, -1));
+            var direction = -player.forward;
+            direction.y = 0;
+            MovePlayer(direction);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            MovePlayer(new Vector3(0, 0, 1));
+            var direction = player.forward;
+            direction.y = 0;
+            MovePlayer(direction);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            MovePlayer(new Vector3(-1, 0, 0));
+            var direction = -player.right;
+            direction.y = 0;
+            MovePlayer(direction);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            MovePlayer(new Vector3(1,0,0));
+            var direction = player.right;
+            direction.y = 0;
+            MovePlayer(direction);
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MakePlayerJump();
         }
+        turn.x += Input.GetAxis("Mouse X");
+        turn.y += Input.GetAxis("Mouse Y");
+        RotatePlayer();
     }
     //Methods
     void MoveEnemy()
@@ -53,11 +69,15 @@ public class GameDirector : MonoBehaviour
     }
     void MovePlayer(Vector3 direction)
     {
-        player.position = player.position + direction * playerSpeed;
+        playerHolder.position = playerHolder.position + direction * playerSpeed;
     }
-
     void MakePlayerJump()
     {
         playerRb.AddForce(new Vector3(0,1,0) * jumpForce);
+    }
+
+    void RotatePlayer()
+    {
+        player.localRotation = Quaternion.Euler(-turn.y * mouseSensitivity, turn.x * mouseSensitivity, 0);
     }
 }
