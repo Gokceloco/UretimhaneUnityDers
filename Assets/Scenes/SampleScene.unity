@@ -140,7 +140,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &23776493
 BoxCollider:
@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 732060385}
   - component: {fileID: 732060384}
   - component: {fileID: 732060383}
+  - component: {fileID: 732060388}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -700,6 +701,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &732060388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732060382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ae4f4f0ba32409459924c6f190ecc31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1207430882}
+  enemySpeed: 0.01
 --- !u!1 &828713974
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,7 +961,6 @@ MonoBehaviour:
   player: {fileID: 828713979}
   playerHolder: {fileID: 1207430882}
   playerRb: {fileID: 1207430881}
-  enemySpeed: -0.01
   playerSpeed: 0.02
   jumpForce: 300
   turn: {x: 0, y: 0}
