@@ -9,13 +9,15 @@ public class GameDirector : MonoBehaviour
     public Transform playerHolder;
     public Rigidbody playerRb;
 
-    public float enemySpeed;
     public float playerSpeed;
     public float jumpForce;
 
     public Vector2 turn;
 
     public float mouseSensitivity;
+
+    public Bullet bulletPrefab;
+    public Transform bulletSpawnPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -26,10 +28,6 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemy.position.z > 2)
-        {
-            MoveEnemy();
-        }
         if (Input.GetKey(KeyCode.S))
         {
             var direction = -player.forward;
@@ -58,14 +56,21 @@ public class GameDirector : MonoBehaviour
         {
             MakePlayerJump();
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            SpawnBullet();
+        }
         turn.x += Input.GetAxis("Mouse X");
         turn.y += Input.GetAxis("Mouse Y");
         RotatePlayer();
     }
+
     //Methods
-    void MoveEnemy()
+    void SpawnBullet()
     {
-        enemy.position = enemy.position + new Vector3(0, 0, 1) * enemySpeed;
+        var newBullet = Instantiate(bulletPrefab);
+        newBullet.transform.position = bulletSpawnPoint.position;
+        newBullet.transform.LookAt(bulletSpawnPoint.position + bulletSpawnPoint.forward);
     }
     void MovePlayer(Vector3 direction)
     {
