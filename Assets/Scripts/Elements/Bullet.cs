@@ -21,6 +21,11 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.CompareTag("MapObjects"))
+        {
+            gameObject.SetActive(false);
         }
     }
 

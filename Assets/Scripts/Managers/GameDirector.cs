@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
+    public InputManager inputManager;
+
     public Transform enemy;
-    public Transform player;
-    public Transform playerHolder;
+    public Player playerHolder;
     public Rigidbody playerRb;
 
-    public float playerSpeed;
-    public float jumpForce;
-
     public Vector2 turn;
-
-    public float mouseSensitivity;
 
     public Bullet bulletPrefab;
     public Transform bulletSpawnPoint;
@@ -28,61 +24,16 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
-            var direction = -player.forward;
-            direction.y = 0;
-            MovePlayer(direction);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            var direction = player.forward;
-            direction.y = 0;
-            MovePlayer(direction);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            var direction = -player.right;
-            direction.y = 0;
-            MovePlayer(direction);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            var direction = player.right;
-            direction.y = 0;
-            MovePlayer(direction);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MakePlayerJump();
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            SpawnBullet();
-        }
         turn.x += Input.GetAxis("Mouse X");
         turn.y += Input.GetAxis("Mouse Y");
-        RotatePlayer();
+        playerHolder.RotatePlayer(turn);
     }
 
     //Methods
-    void SpawnBullet()
+    public void SpawnBullet()
     {
         var newBullet = Instantiate(bulletPrefab);
         newBullet.transform.position = bulletSpawnPoint.position;
         newBullet.transform.LookAt(bulletSpawnPoint.position + bulletSpawnPoint.forward);
-    }
-    void MovePlayer(Vector3 direction)
-    {
-        playerHolder.position = playerHolder.position + direction * playerSpeed;
-    }
-    void MakePlayerJump()
-    {
-        playerRb.AddForce(new Vector3(0,1,0) * jumpForce);
-    }
-
-    void RotatePlayer()
-    {
-        player.localRotation = Quaternion.Euler(-turn.y * mouseSensitivity, turn.x * mouseSensitivity, 0);
     }
 }
