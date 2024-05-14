@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -43,6 +44,12 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             gameDirector.SpawnBullet();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameDirector.mainUI.Show();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
