@@ -8,6 +8,11 @@ public class Enemy : MonoBehaviour
 
     public float enemySpeed;
 
+    public void StartEnemy(Transform pTransform)
+    {
+        playerTransform = pTransform;
+    }
+
     // Update is called once per frame
     void Update()
     {

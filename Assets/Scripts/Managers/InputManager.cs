@@ -43,13 +43,17 @@ public class InputManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            gameDirector.SpawnBullet();
+            gameDirector.SpawnBullets();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             gameDirector.mainUI.Show();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Cursor.lockState = CursorLockMode.None;
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            gameDirector.enemyManager.SpawnWave();
         }
     }
 }

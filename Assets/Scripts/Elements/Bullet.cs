@@ -16,6 +16,19 @@ public class Bullet : MonoBehaviour
         transform.position += transform.forward * bulletSpeed;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            other.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("MapObjects"))
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))

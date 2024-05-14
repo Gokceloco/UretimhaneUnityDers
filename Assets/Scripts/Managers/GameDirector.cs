@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameDirector : MonoBehaviour
 {
     public InputManager inputManager;
+    public EnemyManager enemyManager;
 
     public MainUI mainUI;
 
@@ -18,6 +19,9 @@ public class GameDirector : MonoBehaviour
     public Transform bulletSpawnPoint;
 
     public bool isGameStarted;
+
+    public int bulletCount;
+    public float maxSpread;
 
     // Start is called before the first frame update
     public void StartGame()
@@ -37,11 +41,20 @@ public class GameDirector : MonoBehaviour
         }        
     }
 
+    public void SpawnBullets()
+    {
+        for (int i = 0; i < bulletCount; i++)
+        {
+            SpawnBullet();
+        }
+    }
+
     //Methods
     public void SpawnBullet()
     {
+        var spread = new Vector3(Random.Range(-maxSpread, maxSpread), Random.Range(-maxSpread, maxSpread), Random.Range(-maxSpread, maxSpread));
         var newBullet = Instantiate(bulletPrefab);
         newBullet.transform.position = bulletSpawnPoint.position;
-        newBullet.transform.LookAt(bulletSpawnPoint.position + bulletSpawnPoint.forward);
+        newBullet.transform.LookAt(bulletSpawnPoint.position + bulletSpawnPoint.forward + spread);
     }
 }
