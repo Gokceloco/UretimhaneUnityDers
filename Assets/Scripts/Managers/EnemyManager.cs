@@ -5,17 +5,18 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public GameDirector gameDirector;
-    public Enemy enemyPrefab;
+    public Transform placeHoldersParent;
 
-    public int enemyCount;
+    public Enemy enemyPrefab;
 
     public List<Enemy> activeEnemies = new List<Enemy>();
 
-    public int waveCount;
-
-    private void Start()
+    public void GateTriggered()
     {
-        waveCount = 0;
+        foreach (Enemy enemy in activeEnemies)
+        {
+            enemy.StartMoving();
+        }
     }
 
     public void SpawnWaveDelayed(float delay)
@@ -25,18 +26,16 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnWave()
     {
-        waveCount += 1;
-        for (int i = 0; i < enemyCount * waveCount; i++) 
+        foreach (Transform ph in placeHoldersParent)
         {
-            SpawnEnemy(i);
-        }        
+            SpawnEnemy(ph.position);
+            ph.GetComponent<MeshRenderer>().enabled = false;
+        }
     }
-    public void SpawnEnemy(int i)
+    public void SpawnEnemy(Vector3 position)
     {
         var newEnemy = Instantiate(enemyPrefab);
-        var circleOffset = Random.onUnitSphere;
-        Vector3 offset = new Vector3(circleOffset.x, 0, circleOffset.y);
-        newEnemy.transform.position = gameDirector.playerHolder.transform.position + offset * 20;
+        newEnemy.transform.position = position;
         newEnemy.StartEnemy(gameDirector.playerHolder.transform, this);
         activeEnemies.Add(newEnemy);
     }
@@ -46,14 +45,7 @@ public class EnemyManager : MonoBehaviour
         activeEnemies.Remove(e);
         if (activeEnemies.Count == 0)
         {
-            if (waveCount < 3)
-            {
-                SpawnWave();
-            }
-            else
-            {
-                gameDirector.LevelCompleted();
-            }
+            gameDirector.diamondManager.SpawnDiamonds();
         }
     }
 }

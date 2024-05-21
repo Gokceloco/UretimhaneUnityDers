@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyManager enemyManager;
+    private EnemyManager enemyManager;
     public Transform playerTransform;
 
     public float enemySpeed;
+
+    public bool isEnemyStarted;
 
     public void StartEnemy(Transform pTransform, EnemyManager eManager)
     {
@@ -15,12 +17,20 @@ public class Enemy : MonoBehaviour
         enemyManager = eManager;
     }
 
+    public void StartMoving()
+    {
+        isEnemyStarted = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        var direction = playerTransform.position - transform.position;
-        var directionNormalized = direction.normalized;
-        transform.position += directionNormalized * enemySpeed;
+        if (isEnemyStarted)
+        {
+            var direction = playerTransform.position - transform.position;
+            var directionNormalized = direction.normalized;
+            transform.position += directionNormalized * enemySpeed;
+        }
     }
 
     public void EnemyGotHit()
