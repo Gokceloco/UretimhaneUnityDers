@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8105623931618045861}
   - component: {fileID: 2211102235932775557}
   - component: {fileID: 5873642266941870487}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy Prefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -146,5 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae4f4f0ba32409459924c6f190ecc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyManager: {fileID: 0}
   playerTransform: {fileID: 0}
-  enemySpeed: 0.01
+  enemySpeed: 0.03

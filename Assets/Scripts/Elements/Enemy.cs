@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public EnemyManager enemyManager;
     public Transform playerTransform;
 
     public float enemySpeed;
 
-    public void StartEnemy(Transform pTransform)
+    public void StartEnemy(Transform pTransform, EnemyManager eManager)
     {
         playerTransform = pTransform;
+        enemyManager = eManager;
     }
 
     // Update is called once per frame
@@ -19,5 +21,11 @@ public class Enemy : MonoBehaviour
         var direction = playerTransform.position - transform.position;
         var directionNormalized = direction.normalized;
         transform.position += directionNormalized * enemySpeed;
+    }
+
+    public void EnemyGotHit()
+    {
+        gameObject.SetActive(false);
+        enemyManager.EnemyDied(this);
     }
 }
