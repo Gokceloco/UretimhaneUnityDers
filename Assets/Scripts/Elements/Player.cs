@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(Vector3 direction)
     {
-        transform.position += direction * playerSpeed;
+        transform.position += direction * playerSpeed * Time.deltaTime;
     }
     public void MakePlayerJump()
     {

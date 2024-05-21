@@ -35,7 +35,6 @@ public class GameDirector : MonoBehaviour
         winUI.Hide();
     }
 
-    // Start is called before the first frame update
     public void StartGame()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -43,15 +42,13 @@ public class GameDirector : MonoBehaviour
         enemyManager.SpawnWave();
         ingameControlsLocked = false;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (isGameStarted && !ingameControlsLocked)
         {
             turn.x += Input.GetAxis("Mouse X");
             turn.y += Input.GetAxis("Mouse Y");
-            playerHolder.RotatePlayer(turn);
+            playerHolder.RotatePlayer(turn);            
         }        
     }
 
@@ -65,7 +62,6 @@ public class GameDirector : MonoBehaviour
         }
     }
 
-    //Methods
     public void SpawnBullet()
     {
         var spread = new Vector3(Random.Range(-maxSpread,maxSpread),

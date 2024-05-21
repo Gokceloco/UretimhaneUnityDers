@@ -146,6 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae4f4f0ba32409459924c6f190ecc31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 0}
   playerTransform: {fileID: 0}
-  enemySpeed: 0.03
+  enemySpeed: 5
+  isEnemyStarted: 0

@@ -6,6 +6,10 @@ public class GateTrigger : MonoBehaviour
 {
     public EnemyManager enemyManager;
 
+    private void Start()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

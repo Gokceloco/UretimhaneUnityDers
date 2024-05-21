@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
         {
             var direction = playerTransform.position - transform.position;
             var directionNormalized = direction.normalized;
-            transform.position += directionNormalized * enemySpeed;
+            transform.position += directionNormalized * enemySpeed * Time.deltaTime;
         }
     }
 

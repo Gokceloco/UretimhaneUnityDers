@@ -47,7 +47,7 @@ public class InputManager : MonoBehaviour
             {
                 gameDirector.SpawnBullets();
             }
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
                 gameDirector.mainUI.Show();
                 Cursor.lockState = CursorLockMode.None;
